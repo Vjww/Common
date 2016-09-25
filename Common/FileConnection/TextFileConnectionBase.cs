@@ -49,10 +49,7 @@ namespace Common.FileConnection
                 }
 
                 // Close underlying stream
-                if (fileStream != null)
-                {
-                    fileStream.Close();
-                }
+                fileStream?.Close();
 
                 throw;
             }

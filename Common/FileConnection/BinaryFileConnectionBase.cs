@@ -48,10 +48,7 @@ namespace Common.FileConnection
                 }
 
                 // Close underlying stream
-                if (fileStream != null)
-                {
-                    fileStream.Close();
-                }
+                fileStream?.Close();
 
                 throw;
             }
@@ -103,31 +100,33 @@ namespace Common.FileConnection
             return _binaryReader.ReadInt32();
         }
 
-        public void WriteByte(long filePosition, byte value)
+        public void WriteByte(long position, byte value)
         {
-            if (_streamDirection != StreamDirectionType.Write)
-                throw new Exception("Stream direction must be write.");
-
-            _binaryWriter.BaseStream.Seek(filePosition, SeekOrigin.Begin);
-            _binaryWriter.Write(value);
+            WriteValue(position, value);
         }
 
-        public void WriteByteArray(long filePosition, byte[] value)
+        public void WriteByteArray(long position, byte[] value)
         {
-            if (_streamDirection != StreamDirectionType.Write)
-                throw new Exception("Stream direction must be write.");
-
-            _binaryWriter.BaseStream.Seek(filePosition, SeekOrigin.Begin);
-            _binaryWriter.Write(value);
+            WriteValue(position, value);
         }
 
-        public void WriteInteger(long filePosition, int value)
+        public void WriteInteger(long position, int value)
         {
+            WriteValue(position, value);
+        }
+
+        private void WriteValue<T>(long filePosition, T value)
+        {
+            // Use dynamic to resolve T at runtime
+            // http://stackoverflow.com/a/7148003
+
+            dynamic dynamicValue = value;
+
             if (_streamDirection != StreamDirectionType.Write)
                 throw new Exception("Stream direction must be write.");
 
             _binaryWriter.BaseStream.Seek(filePosition, SeekOrigin.Begin);
-            _binaryWriter.Write(value);
+            _binaryWriter.Write(dynamicValue);
         }
     }
 }
