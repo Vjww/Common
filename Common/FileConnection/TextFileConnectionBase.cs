@@ -5,29 +5,42 @@ using Common.Enums;
 
 namespace Common.FileConnection
 {
-    public class TextFileConnectionBase : IFileConnection
+    public class TextFileConnectionBase : IDisposable
     {
-        protected StreamReader StreamReader;
-        protected StreamWriter StreamWriter;
+        private StreamReader _streamReader;
+        private StreamWriter _streamWriter;
         protected StreamDirectionType? StreamDirection;
+        protected string FilePath;
 
-        public void Open(string filePath, StreamDirectionType streamDirection)
+        protected TextFileConnectionBase(string filePath)
         {
-            FileStream fileStream = null;
+            FilePath = filePath;
+
+            Open(StreamDirectionType.Read);
+        }
+
+        public void Dispose()
+        {
+            Close();
+        }
+
+        protected void Open(StreamDirectionType streamDirection)
+        {
             StreamDirection = streamDirection;
 
             // Open a stream for reading or writing
+            FileStream fileStream = null;
             try
             {
                 switch (StreamDirection)
                 {
                     case StreamDirectionType.Read:
-                        fileStream = File.Open(filePath, FileMode.Open);
-                        StreamReader = new StreamReader(fileStream, Encoding.Default, false);
+                        fileStream = File.Open(FilePath, FileMode.Open);
+                        _streamReader = new StreamReader(fileStream, Encoding.Default, false);
                         break;
                     case StreamDirectionType.Write:
-                        fileStream = File.Open(filePath, FileMode.Open);
-                        StreamWriter = new StreamWriter(fileStream, Encoding.Default);
+                        fileStream = File.Open(FilePath, FileMode.Open);
+                        _streamWriter = new StreamWriter(fileStream, Encoding.Default);
                         break;
                     default:
                         throw new NotImplementedException("Case not implemented in switch statement.");
@@ -36,42 +49,62 @@ namespace Common.FileConnection
             catch (Exception)
             {
                 // Close streams
-                if (StreamReader != null)
+                if (_streamReader != null)
                 {
-                    StreamReader.Close();
-                    StreamReader = null;
+                    _streamReader.Close();
+                    _streamReader = null;
                 }
 
-                if (StreamWriter != null)
+                if (_streamWriter != null)
                 {
-                    StreamWriter.Close();
-                    StreamWriter = null;
+                    _streamWriter.Close();
+                    _streamWriter = null;
                 }
 
-                // Close underlying stream
+                // Close underlying stream if not already closed
                 fileStream?.Close();
 
                 throw;
             }
         }
 
-        public void Close()
+        protected void Close()
         {
             // Close streams
-            if (StreamReader != null)
+            if (_streamReader != null)
             {
-                StreamReader.Close();
-                StreamReader = null;
+                _streamReader.Close();
+                _streamReader = null;
             }
 
-            if (StreamWriter != null)
+            if (_streamWriter != null)
             {
-                StreamWriter.Close();
-                StreamWriter = null;
+                _streamWriter.Close();
+                _streamWriter = null;
             }
 
             // Clear stream direction
             StreamDirection = null;
+        }
+
+        protected virtual string ReadLine()
+        {
+            if (StreamDirection != StreamDirectionType.Read)
+            {
+                throw new Exception("Stream direction must be read.");
+            }
+
+            return _streamReader.ReadLine();
+        }
+
+        protected virtual void WriteLine(string line)
+        {
+            if (StreamDirection != StreamDirectionType.Write)
+            {
+                throw new Exception("Stream direction must be write.");
+            }
+
+            _streamWriter.WriteLine(line);
         }
     }
 }

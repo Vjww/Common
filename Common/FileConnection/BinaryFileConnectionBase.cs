@@ -4,28 +4,41 @@ using Common.Enums;
 
 namespace Common.FileConnection
 {
-    public class BinaryFileConnectionBase : IFileConnection
+    public class BinaryFileConnectionBase : IDisposable
     {
         private BinaryReader _binaryReader;
         private BinaryWriter _binaryWriter;
-        private StreamDirectionType? _streamDirection;
+        protected StreamDirectionType? StreamDirection;
+        protected string FilePath;
 
-        public void Open(string filePath, StreamDirectionType streamDirection)
+        protected BinaryFileConnectionBase(string filePath)
         {
-            FileStream fileStream = null;
-            _streamDirection = streamDirection;
+            FilePath = filePath;
+
+            Open(StreamDirectionType.Read);
+        }
+
+        public void Dispose()
+        {
+            Close();
+        }
+
+        protected void Open(StreamDirectionType streamDirection)
+        {
+            StreamDirection = streamDirection;
 
             // Open a stream for reading or writing
+            FileStream fileStream = null;
             try
             {
-                switch (_streamDirection)
+                switch (StreamDirection)
                 {
                     case StreamDirectionType.Read:
-                        fileStream = File.Open(filePath, FileMode.Open);
+                        fileStream = File.Open(FilePath, FileMode.Open);
                         _binaryReader = new BinaryReader(fileStream);
                         break;
                     case StreamDirectionType.Write:
-                        fileStream = File.Open(filePath, FileMode.Open);
+                        fileStream = File.Open(FilePath, FileMode.Open);
                         _binaryWriter = new BinaryWriter(fileStream);
                         break;
                     default:
@@ -47,14 +60,14 @@ namespace Common.FileConnection
                     _binaryWriter = null;
                 }
 
-                // Close underlying stream
+                // Close underlying stream if not already closed
                 fileStream?.Close();
 
                 throw;
             }
         }
 
-        public void Close()
+        protected void Close()
         {
             // Close streams
             if (_binaryReader != null)
@@ -70,47 +83,53 @@ namespace Common.FileConnection
             }
 
             // Clear stream direction
-            _streamDirection = null;
+            StreamDirection = null;
         }
 
-        public byte ReadByte(long position)
+        public virtual byte ReadByte(long position)
         {
-            if (_streamDirection != StreamDirectionType.Read)
+            if (StreamDirection != StreamDirectionType.Read)
+            {
                 throw new Exception("Stream direction must be read.");
+            }
 
             _binaryReader.BaseStream.Seek(position, SeekOrigin.Begin);
             return _binaryReader.ReadByte();
         }
 
-        public byte[] ReadByteArray(long position, int count)
+        public virtual byte[] ReadByteArray(long position, int count)
         {
-            if (_streamDirection != StreamDirectionType.Read)
+            if (StreamDirection != StreamDirectionType.Read)
+            {
                 throw new Exception("Stream direction must be read.");
+            }
 
             _binaryReader.BaseStream.Seek(position, SeekOrigin.Begin);
             return _binaryReader.ReadBytes(count);
         }
 
-        public int ReadInteger(long position)
+        public virtual int ReadInteger(long position)
         {
-            if (_streamDirection != StreamDirectionType.Read)
+            if (StreamDirection != StreamDirectionType.Read)
+            {
                 throw new Exception("Stream direction must be read.");
+            }
 
             _binaryReader.BaseStream.Seek(position, SeekOrigin.Begin);
             return _binaryReader.ReadInt32();
         }
 
-        public void WriteByte(long position, byte value)
+        public virtual void WriteByte(long position, byte value)
         {
             WriteValue(position, value);
         }
 
-        public void WriteByteArray(long position, byte[] value)
+        public virtual void WriteByteArray(long position, byte[] value)
         {
             WriteValue(position, value);
         }
 
-        public void WriteInteger(long position, int value)
+        public virtual void WriteInteger(long position, int value)
         {
             WriteValue(position, value);
         }
@@ -122,8 +141,10 @@ namespace Common.FileConnection
 
             dynamic dynamicValue = value;
 
-            if (_streamDirection != StreamDirectionType.Write)
+            if (StreamDirection != StreamDirectionType.Write)
+            {
                 throw new Exception("Stream direction must be write.");
+            }
 
             _binaryWriter.BaseStream.Seek(filePosition, SeekOrigin.Begin);
             _binaryWriter.Write(dynamicValue);
