@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Text;
 using Common.Enums;
@@ -24,7 +25,7 @@ namespace Common.FileConnection
             Close();
         }
 
-        protected void Open(StreamDirectionType streamDirection)
+        protected void Open(StreamDirectionType streamDirection, FileMode writeFileMode = FileMode.Open)
         {
             StreamDirection = streamDirection;
 
@@ -39,7 +40,7 @@ namespace Common.FileConnection
                         _streamReader = new StreamReader(fileStream, Encoding.Default, false);
                         break;
                     case StreamDirectionType.Write:
-                        fileStream = File.Open(FilePath, FileMode.Open);
+                        fileStream = File.Open(FilePath, writeFileMode);
                         _streamWriter = new StreamWriter(fileStream, Encoding.Default);
                         break;
                     default:
@@ -97,6 +98,19 @@ namespace Common.FileConnection
             return _streamReader.ReadLine();
         }
 
+        protected virtual Collection<string> ReadLines()
+        {
+            var lines = new Collection<string>();
+
+            string line;
+            while ((line = ReadLine()) != null)
+            {
+                lines.Add(line);
+            }
+
+            return lines;
+        }
+
         protected virtual void WriteLine(string line)
         {
             if (StreamDirection != StreamDirectionType.Write)
@@ -105,6 +119,14 @@ namespace Common.FileConnection
             }
 
             _streamWriter.WriteLine(line);
+        }
+
+        protected virtual void WriteLines(Collection<string> collection)
+        {
+            foreach (var item in collection)
+            {
+                WriteLine(item);
+            }
         }
     }
 }

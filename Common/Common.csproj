@@ -37,6 +37,7 @@
     <Reference Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataAnnotation\ValueMatchAttribute.cs" />
     <Compile Include="Enums\StreamDirectionType.cs" />
     <Compile Include="DataAnnotation\SteppedRangeAttribute.cs" />
     <Compile Include="Extensions\ControlExtension.cs" />
@@ -44,6 +45,7 @@
     <Compile Include="Extensions\StringExtension.cs" />
     <Compile Include="FileConnection\BinaryFileConnectionBase.cs" />
     <Compile Include="FileConnection\TextFileConnectionBase.cs" />
+    <Compile Include="HexConversion.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
