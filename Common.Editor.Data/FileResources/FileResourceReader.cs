@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
-using Common.Editor.Infrastructure.Streams;
+using Common.Editor.Data.Streams;
 
-namespace Common.Editor.Infrastructure.FileResources
+namespace Common.Editor.Data.FileResources
 {
     public class FileResourceReader<TStream> : IFileResourceReader<TStream>
         where TStream : Stream

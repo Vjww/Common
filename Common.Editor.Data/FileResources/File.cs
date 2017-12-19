@@ -2,7 +2,7 @@ using System;
 using System.ComponentModel;
 using System.IO;
 
-namespace Common.Editor.Infrastructure.FileResources
+namespace Common.Editor.Data.FileResources
 {
     public class File : IFile
     {

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.IO;
 
-namespace Common.Editor.Infrastructure.Streams
+namespace Common.Editor.Data.Streams
 {
     public interface IStreamReader<in TStream>
         where TStream : Stream

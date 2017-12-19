@@ -2,7 +2,7 @@
 using System.Collections;
 using System.IO;
 
-namespace Common.Editor.Infrastructure.FileResources
+namespace Common.Editor.Data.FileResources
 {
     public class FileResource<TStream> : IFileResource
         where TStream : Stream

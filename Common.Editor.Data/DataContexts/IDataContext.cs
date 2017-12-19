@@ -1,4 +1,4 @@
-﻿namespace Common.Editor.Infrastructure.DataContexts
+﻿namespace Common.Editor.Data.DataContexts
 {
     public interface IDataContext
     {

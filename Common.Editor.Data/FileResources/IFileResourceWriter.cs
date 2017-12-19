@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.IO;
 
-namespace Common.Editor.Infrastructure.FileResources
+namespace Common.Editor.Data.FileResources
 {
     public interface IFileResourceWriter<in TStream>
         where TStream : Stream

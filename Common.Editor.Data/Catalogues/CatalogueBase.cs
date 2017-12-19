@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Common.Editor.Infrastructure.Catalogues
+namespace Common.Editor.Data.Catalogues
 {
     public class CatalogueBase<TCatalogueItem> : List<TCatalogueItem>, ICatalogue
         where TCatalogueItem : class, ICatalogueItem

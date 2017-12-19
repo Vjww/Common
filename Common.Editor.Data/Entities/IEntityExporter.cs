@@ -1,4 +1,4 @@
-﻿namespace Common.Editor.Infrastructure.Entities
+﻿namespace Common.Editor.Data.Entities
 {
     public interface IEntityExporter
     {

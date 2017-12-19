@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Common.Editor.Infrastructure.Catalogues
+namespace Common.Editor.Data.Catalogues
 {
     public interface ICatalogueImporter<out TCatalogueItem>
         where TCatalogueItem : class, ICatalogueItem

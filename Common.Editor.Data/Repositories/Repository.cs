@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Common.Editor.Infrastructure.Entities;
+using Common.Editor.Data.Entities;
 
-namespace Common.Editor.Infrastructure.Repositories
+namespace Common.Editor.Data.Repositories
 {
     public class Repository<TEntity> : IRepository<TEntity>
         where TEntity : class, IEntity

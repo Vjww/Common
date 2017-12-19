@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace Common.Editor.Infrastructure.FileResources
+namespace Common.Editor.Data.FileResources
 {
     public interface IFileResourceExporter<in TStream>
         where TStream : Stream

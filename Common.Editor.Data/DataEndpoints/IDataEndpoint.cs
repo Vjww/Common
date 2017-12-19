@@ -1,6 +1,6 @@
-﻿using Common.Editor.Infrastructure.DataConnections;
+﻿using Common.Editor.Data.DataConnections;
 
-namespace Common.Editor.Infrastructure.DataEndpoints
+namespace Common.Editor.Data.DataEndpoints
 {
     public interface IDataEndpoint<in TDataConnection>
         where TDataConnection : class, IDataConnection

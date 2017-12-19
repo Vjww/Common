@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using Common.Editor.Infrastructure.Entities;
-using Common.Editor.Infrastructure.Repositories;
+using Common.Editor.Data.Entities;
+using Common.Editor.Data.Repositories;
 
-namespace Common.Editor.Infrastructure.DataContexts
+namespace Common.Editor.Data.DataContexts
 {
     public interface IDataContextExporter
     {

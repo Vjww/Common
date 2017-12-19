@@ -2,10 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Text;
 
-namespace Common.Editor.Infrastructure.Streams
+namespace Common.Editor.Data.Streams
 {
     public class StreamReader<TStream> : IStreamReader<TStream>
         where TStream : Stream

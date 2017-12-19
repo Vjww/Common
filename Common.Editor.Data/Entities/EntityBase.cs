@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Common.Editor.Infrastructure.Entities
+namespace Common.Editor.Data.Entities
 {
     public class EntityBase : IEntity
     {

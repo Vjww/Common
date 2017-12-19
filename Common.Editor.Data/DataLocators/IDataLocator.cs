@@ -1,4 +1,4 @@
-﻿namespace Common.Editor.Infrastructure.DataLocators
+﻿namespace Common.Editor.Data.DataLocators
 {
     public interface IDataLocator
     {

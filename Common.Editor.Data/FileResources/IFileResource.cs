@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 
-namespace Common.Editor.Infrastructure.FileResources
+namespace Common.Editor.Data.FileResources
 {
     public interface IFileResource
     {

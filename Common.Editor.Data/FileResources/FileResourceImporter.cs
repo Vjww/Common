@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Common.Editor.Infrastructure.FileResources
+namespace Common.Editor.Data.FileResources
 {
     public class FileResourceImporter<TStream> : IFileResourceImporter<TStream>
         where TStream : Stream, new()

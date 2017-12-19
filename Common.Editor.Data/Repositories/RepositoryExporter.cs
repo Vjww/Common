@@ -1,7 +1,7 @@
 ﻿using System;
-using Common.Editor.Infrastructure.Entities;
+using Common.Editor.Data.Entities;
 
-namespace Common.Editor.Infrastructure.Repositories
+namespace Common.Editor.Data.Repositories
 {
     public class RepositoryExporter : IRepositoryExporter
     {

@@ -1,6 +1,6 @@
-﻿using Common.Editor.Infrastructure.Entities;
+﻿using Common.Editor.Data.Entities;
 
-namespace Common.Editor.Infrastructure.Factories
+namespace Common.Editor.Data.Factories
 {
     public interface IEntityFactory<out TEntity>
         where TEntity : class, IEntity

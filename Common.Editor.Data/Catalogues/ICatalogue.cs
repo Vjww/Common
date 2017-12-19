@@ -1,4 +1,4 @@
-﻿namespace Common.Editor.Infrastructure.Catalogues
+﻿namespace Common.Editor.Data.Catalogues
 {
     public interface ICatalogue
     {

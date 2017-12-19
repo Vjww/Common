@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Text;
 
-namespace Common.Editor.Infrastructure.Streams
+namespace Common.Editor.Data.Streams
 {
     public class StreamWriter<TStream> : IStreamWriter<TStream>
         where TStream : Stream
