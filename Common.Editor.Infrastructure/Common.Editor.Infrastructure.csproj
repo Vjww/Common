@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Common.Editor.Infrastructure</RootNamespace>
     <AssemblyName>Common.Editor.Infrastructure</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -40,67 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Catalogues\CatalogueBase.cs" />
-    <Compile Include="Catalogues\ICatalogueItem.cs" />
-    <Compile Include="Catalogues\ICatalogueReader.cs" />
-    <Compile Include="Catalogues\ICatalogueWriter.cs" />
-    <Compile Include="FileResources\FileResource.cs" />
-    <Compile Include="FileResources\FileResourceWriter.cs" />
-    <Compile Include="FileResourceMapperFactory.cs" />
-    <Compile Include="FileResources\FileResourceService.cs" />
-    <Compile Include="DataContexts\IDataContext.cs" />
-    <Compile Include="FileResources\IFileResource.cs" />
-    <Compile Include="Catalogues\ICatalogue.cs" />
-    <Compile Include="FileResources\FileResourceReader.cs" />
-    <Compile Include="FileResources\IFileResourceReader.cs" />
-    <Compile Include="FileResources\IFileResourceWriter.cs" />
-    <Compile Include="Catalogues\ICatalogueExporter.cs" />
-    <Compile Include="Catalogues\ICatalogueImporter.cs" />
-    <Compile Include="DataConnections\IDataConnection.cs" />
-    <Compile Include="DataSets\DataSetBase.cs" />
-    <Compile Include="DataSets\DataSetImporter.cs" />
-    <Compile Include="DataSets\DataSetExporter.cs" />
-    <Compile Include="DataSets\IDataSet.cs" />
-    <Compile Include="DataSets\IDataSetImporter.cs" />
-    <Compile Include="DataSets\IDataSetExporter.cs" />
-    <Compile Include="EntityExporter_REDUNDANT.cs" />
-    <Compile Include="Entities\IEntity.cs" />
-    <Compile Include="Entities\IEntityImporter.cs" />
-    <Compile Include="Entities\IEntityExporter.cs" />
-    <Compile Include="IFileResourceMapper.cs" />
-    <Compile Include="Old\Datasets\Dataset.cs" />
-    <Compile Include="Old\Datasets\IDataset.cs" />
-    <Compile Include="Old\DataSources\IDataSource.cs" />
-    <Compile Include="Old\Entities\EntityBase.cs" />
-    <Compile Include="Old\Entities\IEntity.cs" />
-    <Compile Include="Old\Factories\EntityFactory.cs" />
-    <Compile Include="Old\Factories\LocatorFactory.cs" />
-    <Compile Include="Old\Locators\ILocator.cs" />
-    <Compile Include="Old\Locators\LocatorBase.cs" />
-    <Compile Include="Old\Mappers\IMapper.cs" />
-    <Compile Include="Old\Mappers\MapperBase.cs" />
-    <Compile Include="Old\Repositories\IRepository.cs" />
-    <Compile Include="Old\Repositories\RepositoryBase.cs" />
-    <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Repositories\RepositoryExporter.cs" />
-    <Compile Include="FileResources\FileResourceExporter.cs" />
-    <Compile Include="FileResources\FileResourceImporter.cs" />
-    <Compile Include="FileResources\IFileResourceExporter.cs" />
-    <Compile Include="FileResources\IFileResourceImporter.cs" />
-    <Compile Include="Repositories\IRepository.cs" />
-    <Compile Include="Repositories\RepositoryImporter.cs" />
-    <Compile Include="Repositories\IRepositoryExporter.cs" />
-    <Compile Include="Repositories\IRepositoryImporter.cs" />
-    <Compile Include="Streams\IStreamReader.cs" />
-    <Compile Include="Streams\StreamReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Streams\IStreamWriter.cs" />
-    <Compile Include="FileResources\IFileResourceService.cs" />
-    <Compile Include="Streams\StreamWriter.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Old\Connections\" />
-    <Folder Include="Old\Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

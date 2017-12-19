@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D3A62601-844D-459D-A720-9530CD86A7DE}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Common.Editor.Data</RootNamespace>
+    <AssemblyName>Common.Editor.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Catalogues\CatalogueBase.cs" />
+    <Compile Include="Catalogues\ICatalogue.cs" />
+    <Compile Include="Catalogues\ICatalogueExporter.cs" />
+    <Compile Include="Catalogues\ICatalogueImporter.cs" />
+    <Compile Include="Catalogues\ICatalogueItem.cs" />
+    <Compile Include="Catalogues\ICatalogueReader.cs" />
+    <Compile Include="Catalogues\ICatalogueWriter.cs" />
+    <Compile Include="DataConnections\IDataConnection.cs" />
+    <Compile Include="DataContexts\DataContextExporter.cs" />
+    <Compile Include="DataContexts\DataContextImporter.cs" />
+    <Compile Include="DataContexts\IDataContext.cs" />
+    <Compile Include="DataContexts\IDataContextExporter.cs" />
+    <Compile Include="DataContexts\IDataContextImporter.cs" />
+    <Compile Include="DataEndpoints\IDataEndpoint.cs" />
+    <Compile Include="DataLocators\IDataLocator.cs" />
+    <Compile Include="Entities\EntityBase.cs" />
+    <Compile Include="Entities\IEntity.cs" />
+    <Compile Include="Entities\IEntityExporter.cs" />
+    <Compile Include="Entities\IEntityImporter.cs" />
+    <Compile Include="Factories\IEntityFactory.cs" />
+    <Compile Include="FileResources\File.cs" />
+    <Compile Include="FileResources\FileResource.cs" />
+    <Compile Include="FileResources\FileResourceExporter.cs" />
+    <Compile Include="FileResources\FileResourceImporter.cs" />
+    <Compile Include="FileResources\FileResourceReader.cs" />
+    <Compile Include="FileResources\FileResourceWriter.cs" />
+    <Compile Include="FileResources\IFile.cs" />
+    <Compile Include="FileResources\IFileResource.cs" />
+    <Compile Include="FileResources\IFileResourceExporter.cs" />
+    <Compile Include="FileResources\IFileResourceImporter.cs" />
+    <Compile Include="FileResources\IFileResourceReader.cs" />
+    <Compile Include="FileResources\IFileResourceWriter.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\IRepository.cs" />
+    <Compile Include="Repositories\IRepositoryExporter.cs" />
+    <Compile Include="Repositories\IRepositoryImporter.cs" />
+    <Compile Include="Repositories\Repository.cs" />
+    <Compile Include="Repositories\RepositoryExporter.cs" />
+    <Compile Include="Repositories\RepositoryImporter.cs" />
+    <Compile Include="Streams\IStreamReader.cs" />
+    <Compile Include="Streams\IStreamWriter.cs" />
+    <Compile Include="Streams\StreamReader.cs" />
+    <Compile Include="Streams\StreamWriter.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
