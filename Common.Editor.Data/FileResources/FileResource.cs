@@ -1,30 +1,32 @@
 ﻿using System;
 using System.Collections;
 using System.IO;
+using Common.Editor.Data.Factories;
 
 namespace Common.Editor.Data.FileResources
 {
-    public class FileResource<TStream> : IFileResource
-        where TStream : Stream
+    public class FileResource : IFileResource
     {
-        private TStream _stream;
-        private readonly IFileResourceExporter<TStream> _fileResourceExporter;
-        private readonly IFileResourceImporter<TStream> _fileResourceImporter;
-        private readonly IFileResourceReader<TStream> _fileResourceReader;
-        private readonly IFileResourceWriter<TStream> _fileResourceWriter;
+        private Stream _stream;
+
+        private readonly IFileResourceExporter _fileResourceExporter;
+        private readonly IFileResourceImporter _fileResourceImporter;
+        private readonly IFileResourceReader _fileResourceReader;
+        private readonly IFileResourceWriter _fileResourceWriter;
 
         public FileResource(
-            TStream stream,
-            IFileResourceExporter<TStream> fileResourceExporter,
-            IFileResourceImporter<TStream> fileResourceImporter,
-            IFileResourceReader<TStream> fileResourceReader,
-            IFileResourceWriter<TStream> fileResourceWriter)
+            IFileResourceExporter fileResourceExporter,
+            IFileResourceImporter fileResourceImporter,
+            IFileResourceReader fileResourceReader,
+            IFileResourceWriter fileResourceWriter,
+            IStreamFactory streamFactory)
         {
-            _stream = stream ?? throw new ArgumentNullException(nameof(stream));
             _fileResourceExporter = fileResourceExporter ?? throw new ArgumentNullException(nameof(fileResourceExporter));
             _fileResourceImporter = fileResourceImporter ?? throw new ArgumentNullException(nameof(fileResourceImporter));
             _fileResourceReader = fileResourceReader ?? throw new ArgumentNullException(nameof(fileResourceReader));
             _fileResourceWriter = fileResourceWriter ?? throw new ArgumentNullException(nameof(fileResourceWriter));
+            if (streamFactory == null) throw new ArgumentNullException(nameof(streamFactory));
+            _stream = streamFactory.Create();
         }
 
         public void Export(string filePath)

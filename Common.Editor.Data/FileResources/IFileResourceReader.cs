@@ -3,10 +3,9 @@ using System.IO;
 
 namespace Common.Editor.Data.FileResources
 {
-    public interface IFileResourceReader<in TStream>
-        where TStream : Stream
+    public interface IFileResourceReader
     {
-        int ReadInteger(TStream stream, int offset);
-        IEnumerable ReadStringList(TStream stream);
+        int ReadInteger(Stream stream, int offset);
+        IEnumerable ReadStringList(Stream stream);
     }
 }

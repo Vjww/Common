@@ -5,17 +5,16 @@ using Common.Editor.Data.Streams;
 
 namespace Common.Editor.Data.FileResources
 {
-    public class FileResourceWriter<TStream> : IFileResourceWriter<TStream>
-        where TStream : Stream
+    public class FileResourceWriter : IFileResourceWriter
     {
-        private readonly IStreamWriter<TStream> _streamWriter;
+        private readonly IStreamWriter _streamWriter;
 
-        public FileResourceWriter(IStreamWriter<TStream> streamWriter)
+        public FileResourceWriter(IStreamWriter streamWriter)
         {
             _streamWriter = streamWriter ?? throw new ArgumentNullException(nameof(streamWriter));
         }
 
-        public void WriteInteger(TStream stream, int offset, int value)
+        public void WriteInteger(Stream stream, int offset, int value)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset));
@@ -24,7 +23,7 @@ namespace Common.Editor.Data.FileResources
             _streamWriter.Write(stream, offset, bytes, SeekOrigin.Begin);
         }
 
-        public void WriteStringList(TStream stream, IEnumerable list)
+        public void WriteStringList(Stream stream, IEnumerable list)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             if (list == null) throw new ArgumentNullException(nameof(list));

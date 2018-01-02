@@ -3,10 +3,9 @@ using System.IO;
 
 namespace Common.Editor.Data.Streams
 {
-    public interface IStreamReader<in TStream>
-        where TStream : Stream
+    public interface IStreamReader
     {
-        byte[] Read(TStream stream, long offset, int count, SeekOrigin seekOrigin);
-        IEnumerable ReadStringList(TStream stream);
+        byte[] Read(Stream stream, long offset, int count, SeekOrigin seekOrigin);
+        IEnumerable ReadStringList(Stream stream);
     }
 }

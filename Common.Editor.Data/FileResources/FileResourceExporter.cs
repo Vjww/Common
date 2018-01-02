@@ -3,8 +3,7 @@ using System.IO;
 
 namespace Common.Editor.Data.FileResources
 {
-    public class FileResourceExporter<TStream> : IFileResourceExporter<TStream>
-        where TStream : Stream, new()
+    public class FileResourceExporter : IFileResourceExporter
     {
         private readonly IFile _fileResourceService;
 
@@ -13,7 +12,7 @@ namespace Common.Editor.Data.FileResources
             _fileResourceService = fileResourceService ?? throw new ArgumentNullException(nameof(fileResourceService));
         }
 
-        public void Export(TStream stream, string filePath)
+        public void Export(Stream stream, string filePath)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             if (string.IsNullOrWhiteSpace(filePath))

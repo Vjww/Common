@@ -13,18 +13,21 @@ namespace Common.Editor.Data.Repositories
             _entityImporter = entityImporter ?? throw new ArgumentNullException(nameof(entityImporter));
         }
 
-        public void Import(IRepository<IEntity> repository)
+        public IEnumerable<IEntity> Import(int repositoryCapacity)
         {
-            if (repository == null) throw new ArgumentNullException(nameof(repository));
-
-            var list = new List<IEntity>();
-            for (var i = 0; i < repository.Capacity; i++)
+            if (repositoryCapacity <= 0)
             {
-                var entity = _entityImporter.Import(i);
-                list.Add(entity);
+                throw new ArgumentOutOfRangeException(nameof(repositoryCapacity));
             }
 
-            repository.Set(list);
+            var entities = new List<IEntity>();
+            for (var i = 0; i < repositoryCapacity; i++)
+            {
+                var entity = _entityImporter.Import(i);
+                entities.Add(entity);
+            }
+
+            return entities;
         }
     }
 }

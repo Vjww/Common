@@ -1,24 +1,28 @@
 ﻿using System;
 using System.IO;
+using Common.Editor.Data.Factories;
 
 namespace Common.Editor.Data.FileResources
 {
-    public class FileResourceImporter<TStream> : IFileResourceImporter<TStream>
-        where TStream : Stream, new()
+    public class FileResourceImporter : IFileResourceImporter
     {
         private readonly IFile _fileResourceService;
+        private readonly IStreamFactory _streamFactory;
 
-        public FileResourceImporter(IFile fileResourceService)
+        public FileResourceImporter(
+            IFile fileResourceService,
+            IStreamFactory streamFactory)
         {
             _fileResourceService = fileResourceService ?? throw new ArgumentNullException(nameof(fileResourceService));
+            _streamFactory = streamFactory ?? throw new ArgumentNullException(nameof(streamFactory));
         }
 
-        public TStream Import(string filePath)
+        public Stream Import(string filePath)
         {
             if (string.IsNullOrWhiteSpace(filePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(filePath));
 
-            var stream = new TStream();
+            var stream = _streamFactory.Create();
             using (var fileStream = _fileResourceService.Open(filePath, FileMode.Open, FileAccess.Read))
             {
                 fileStream.Seek(0, SeekOrigin.Begin);

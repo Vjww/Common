@@ -1,7 +1,10 @@
+using System.Collections.Generic;
+
 namespace Common.Editor.Data.Catalogues
 {
-    public interface ICatalogueWriter
+    public interface ICatalogueWriter<in TCatalogueItem>
+        where TCatalogueItem : class, ICatalogueItem
     {
-        void Write(int id, string value);
+        void Write(IEnumerable<TCatalogueItem> catalogue, int id, string value);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Common.Editor.Data.Entities;
 
 namespace Common.Editor.Data.Repositories
@@ -12,11 +13,8 @@ namespace Common.Editor.Data.Repositories
             _entityExporter = entityExporter ?? throw new ArgumentNullException(nameof(entityExporter));
         }
 
-        public void Export(IRepository<IEntity> repository)
+        public void Export(IEnumerable<IEntity> entities)
         {
-            if (repository == null) throw new ArgumentNullException(nameof(repository));
-
-            var entities = repository.Get();
             foreach (var entity in entities)
             {
                 _entityExporter.Export(entity);

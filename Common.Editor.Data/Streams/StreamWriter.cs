@@ -6,10 +6,16 @@ using System.Text;
 
 namespace Common.Editor.Data.Streams
 {
-    public class StreamWriter<TStream> : IStreamWriter<TStream>
-        where TStream : Stream
+    public class StreamWriter : IStreamWriter
     {
-        public void Write(TStream stream, long offset, byte value, SeekOrigin seekOrigin = SeekOrigin.Begin)
+        private readonly IStreamFactory _streamFactory;
+
+        public StreamWriter(IStreamFactory streamFactory)
+        {
+            _streamFactory = streamFactory ?? throw new ArgumentNullException(nameof(streamFactory));
+        }
+
+        public void Write(Stream stream, long offset, byte value, SeekOrigin seekOrigin = SeekOrigin.Begin)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             if (!Enum.IsDefined(typeof(SeekOrigin), seekOrigin))
@@ -18,7 +24,7 @@ namespace Common.Editor.Data.Streams
             Write(stream, offset, new[] { value }, seekOrigin);
         }
 
-        public void Write(TStream stream, long offset, byte[] values, SeekOrigin seekOrigin = SeekOrigin.Begin)
+        public void Write(Stream stream, long offset, byte[] values, SeekOrigin seekOrigin = SeekOrigin.Begin)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             if (values == null) throw new ArgumentNullException(nameof(values));
@@ -30,14 +36,17 @@ namespace Common.Editor.Data.Streams
             stream.Write(values, 0, values.Length);
         }
 
-        public void WriteStringList(TStream stream, IEnumerable list)
+        public void WriteStringList(Stream stream, IEnumerable list)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             if (list == null) throw new ArgumentNullException(nameof(list));
 
+            var streamCopy = _streamFactory.Create();
+            stream.CopyTo(streamCopy);
+            stream.Seek(0, SeekOrigin.Begin);
+
             // TODO: Remove the dependancy on the CLI StreamWriter class
-            // TODO: as this code will also close the stream??? causing a bug
-            using (var streamWriter = new StreamWriter(stream, Encoding.Default))
+            using (var streamWriter = new System.IO.StreamWriter(streamCopy, Encoding.Default))
             {
                 foreach (var item in list)
                 {

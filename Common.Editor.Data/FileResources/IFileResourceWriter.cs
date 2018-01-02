@@ -3,10 +3,9 @@ using System.IO;
 
 namespace Common.Editor.Data.FileResources
 {
-    public interface IFileResourceWriter<in TStream>
-        where TStream : Stream
+    public interface IFileResourceWriter
     {
-        void WriteInteger(TStream stream, int offset, int value);
-        void WriteStringList(TStream stream, IEnumerable list);
+        void WriteInteger(Stream stream, int offset, int value);
+        void WriteStringList(Stream stream, IEnumerable list);
     }
 }

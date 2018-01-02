@@ -4,14 +4,15 @@ using Common.Editor.Data.Entities;
 
 namespace Common.Editor.Data.Repositories
 {
-    public interface IRepository<TEntity>
-        where TEntity : class, IEntity
+    public interface IRepository
     {
-        int Capacity { get; set; }
-        TEntity GetById(int id);
-        IEnumerable<TEntity> Get();
-        IEnumerable<TEntity> Get(Func<TEntity, bool> predicate);
-        void SetById(TEntity item);
-        void Set(IEnumerable<TEntity> list);
+        int RepositoryCapacity { get; set; }
+        void Export();
+        IEntity GetById(int id);
+        IEnumerable<IEntity> Get();
+        IEnumerable<IEntity> Get(Func<IEntity, bool> predicate);
+        void Import();
+        void SetById(IEntity item);
+        void Set(IEnumerable<IEntity> entities);
     }
 }

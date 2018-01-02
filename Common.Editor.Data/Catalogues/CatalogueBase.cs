@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Common.Editor.Data.Catalogues
 {
@@ -9,14 +8,14 @@ namespace Common.Editor.Data.Catalogues
     {
         private readonly ICatalogueExporter<TCatalogueItem> _catalogueExporter;
         private readonly ICatalogueImporter<TCatalogueItem> _catalogueImporter;
-        private readonly ICatalogueReader _catalogueReader;
-        private readonly ICatalogueWriter _catalogueWriter;
+        private readonly ICatalogueReader<TCatalogueItem> _catalogueReader;
+        private readonly ICatalogueWriter<TCatalogueItem> _catalogueWriter;
 
         protected CatalogueBase(
             ICatalogueExporter<TCatalogueItem> catalogueExporter,
             ICatalogueImporter<TCatalogueItem> catalogueImporter,
-            ICatalogueReader catalogueReader,
-            ICatalogueWriter catalogueWriter)
+            ICatalogueReader<TCatalogueItem> catalogueReader,
+            ICatalogueWriter<TCatalogueItem> catalogueWriter)
         {
             _catalogueExporter = catalogueExporter ?? throw new ArgumentNullException(nameof(catalogueExporter));
             _catalogueImporter = catalogueImporter ?? throw new ArgumentNullException(nameof(catalogueImporter));
@@ -29,7 +28,7 @@ namespace Common.Editor.Data.Catalogues
             if (string.IsNullOrWhiteSpace(filePath))
                 throw new ArgumentException("Value cannot be null or whitespace.", nameof(filePath));
 
-            _catalogueExporter.Export(this.ToList(), filePath);
+            _catalogueExporter.Export(this, filePath);
         }
 
         public void Import(string filePath)
@@ -45,7 +44,7 @@ namespace Common.Editor.Data.Catalogues
         {
             if (id < 0) throw new ArgumentOutOfRangeException(nameof(id));
 
-            return _catalogueReader.Read(id);
+            return _catalogueReader.Read(this, id);
         }
 
         public void Write(int id, string value)
@@ -53,7 +52,7 @@ namespace Common.Editor.Data.Catalogues
             if (value == null) throw new ArgumentNullException(nameof(value));
             if (id < 0) throw new ArgumentOutOfRangeException(nameof(id));
 
-            _catalogueWriter.Write(id, value);
+            _catalogueWriter.Write(this, id, value);
         }
     }
 }

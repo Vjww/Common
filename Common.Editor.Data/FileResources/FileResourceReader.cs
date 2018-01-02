@@ -5,17 +5,16 @@ using Common.Editor.Data.Streams;
 
 namespace Common.Editor.Data.FileResources
 {
-    public class FileResourceReader<TStream> : IFileResourceReader<TStream>
-        where TStream : Stream
+    public class FileResourceReader : IFileResourceReader
     {
-        private readonly IStreamReader<TStream> _streamReader;
+        private readonly IStreamReader _streamReader;
 
-        public FileResourceReader(IStreamReader<TStream> streamReader)
+        public FileResourceReader(IStreamReader streamReader)
         {
             _streamReader = streamReader ?? throw new ArgumentNullException(nameof(streamReader));
         }
 
-        public int ReadInteger(TStream stream, int offset)
+        public int ReadInteger(Stream stream, int offset)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             if (offset < 0) throw new ArgumentOutOfRangeException(nameof(offset));
@@ -24,7 +23,7 @@ namespace Common.Editor.Data.FileResources
             return BitConverter.ToInt32(bytes, 0);
         }
 
-        public IEnumerable ReadStringList(TStream stream)
+        public IEnumerable ReadStringList(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
 

@@ -3,13 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+using Common.Editor.Data.Factories;
 
 namespace Common.Editor.Data.Streams
 {
-    public class StreamReader<TStream> : IStreamReader<TStream>
-        where TStream : Stream
+    public class StreamReader : IStreamReader
     {
-        public byte[] Read(TStream stream, long offset, int count, SeekOrigin seekOrigin = SeekOrigin.Begin)
+        private readonly IStreamFactory _streamFactory;
+
+        public StreamReader(IStreamFactory streamFactory)
+        {
+            _streamFactory = streamFactory ?? throw new ArgumentNullException(nameof(streamFactory));
+        }
+
+        public byte[] Read(Stream stream, long offset, int count, SeekOrigin seekOrigin = SeekOrigin.Begin)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
             if (count <= 0) throw new ArgumentOutOfRangeException(nameof(count));
@@ -22,15 +29,18 @@ namespace Common.Editor.Data.Streams
             return buffer;
         }
 
-        public IEnumerable ReadStringList(TStream stream)
+        public IEnumerable ReadStringList(Stream stream)
         {
             if (stream == null) throw new ArgumentNullException(nameof(stream));
 
             var list = new List<string>();
 
+            var streamCopy = _streamFactory.Create();
+            stream.CopyTo(streamCopy);
+            streamCopy.Seek(0, SeekOrigin.Begin);
+
             // TODO: Remove the dependancy on the CLI StreamReader class
-            // TODO: as this code will also close the stream??? causing a bug
-            using (var streamReader = new StreamReader(stream, Encoding.Default))
+            using (var streamReader = new System.IO.StreamReader(streamCopy, Encoding.Default))
             {
                 string line;
                 while ((line = streamReader.ReadLine()) != null)

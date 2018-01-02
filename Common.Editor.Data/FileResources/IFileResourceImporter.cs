@@ -2,9 +2,8 @@
 
 namespace Common.Editor.Data.FileResources
 {
-    public interface IFileResourceImporter<out TStream>
-        where TStream : Stream
+    public interface IFileResourceImporter
     {
-        TStream Import(string filePath);
+        Stream Import(string filePath);
     }
 }
