@@ -4,11 +4,11 @@ using Common.Editor.Data.Entities;
 
 namespace Common.Editor.Data.Repositories
 {
-    public class RepositoryImporter : IRepositoryImporter
+    public class RepositoryImporterBase : IRepositoryImporter
     {
         private readonly IEntityImporter _entityImporter;
 
-        public RepositoryImporter(IEntityImporter entityImporter)
+        protected RepositoryImporterBase(IEntityImporter entityImporter)
         {
             _entityImporter = entityImporter ?? throw new ArgumentNullException(nameof(entityImporter));
         }

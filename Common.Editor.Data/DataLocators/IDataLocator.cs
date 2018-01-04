@@ -4,6 +4,6 @@
     {
         int Id { get; }
 
-        void Map(int id);
+        void Initialise(int id);
     }
 }

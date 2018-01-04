@@ -3,6 +3,7 @@ using System.Collections;
 using System.ComponentModel;
 using System.IO;
 using System.Text;
+using Common.Editor.Data.Factories;
 
 namespace Common.Editor.Data.Streams
 {

@@ -4,11 +4,11 @@ using Common.Editor.Data.Entities;
 
 namespace Common.Editor.Data.Repositories
 {
-    public class RepositoryExporter : IRepositoryExporter
+    public class RepositoryExporterBase : IRepositoryExporter
     {
         private readonly IEntityExporter _entityExporter;
 
-        public RepositoryExporter(IEntityExporter entityExporter)
+        protected RepositoryExporterBase(IEntityExporter entityExporter)
         {
             _entityExporter = entityExporter ?? throw new ArgumentNullException(nameof(entityExporter));
         }

@@ -80,8 +80,8 @@
     <Compile Include="Repositories\IRepositoryExporter.cs" />
     <Compile Include="Repositories\IRepositoryImporter.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
-    <Compile Include="Repositories\RepositoryExporter.cs" />
-    <Compile Include="Repositories\RepositoryImporter.cs" />
+    <Compile Include="Repositories\RepositoryExporterBase.cs" />
+    <Compile Include="Repositories\RepositoryImporterBase.cs" />
     <Compile Include="Streams\IStreamReader.cs" />
     <Compile Include="Streams\IStreamWriter.cs" />
     <Compile Include="Streams\StreamReader.cs" />
